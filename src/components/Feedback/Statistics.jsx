@@ -10,7 +10,6 @@ export const Statistics = ({
 }) => {
   return (
     <FeedbackStatistics>
-      <Span>There is no feedback</Span>
       <Span>Good: {good}</Span>
       <Span>Neutral: {neutral}</Span>
       <Span>Bad: {bad}</Span>

@@ -3,6 +3,7 @@ import { Section } from './Feedback/Section';
 import { Statistics } from './Feedback/Statistics';
 import { AppWrapper } from './Helpers/Components.styled';
 import { Component } from 'react';
+import { Notification } from './Helpers/Notification';
 
 export class App extends Component {
   state = {
@@ -11,21 +12,9 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleGoodReview = () => {
+  handleReview = option => {
     this.setState(currState => {
-      return { good: currState.good + 1 };
-    });
-  };
-
-  handleNeutralReview = () => {
-    this.setState(currState => {
-      return { neutral: currState.neutral + 1 };
-    });
-  };
-
-  handleBadReview = () => {
-    this.setState(currState => {
-      return { bad: currState.bad + 1 };
+      return { [option]: currState[option] + 1 };
     });
   };
 
@@ -42,22 +31,22 @@ export class App extends Component {
       <AppWrapper>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
-            options={{
-              good: this.handleGoodReview,
-              neutral: this.handleNeutralReview,
-              bad: this.handleBadReview,
-            }}
-            // onLeaveFeedback={0}
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.handleReview}
           />
         </Section>
         <Section title={'Statistics'}>
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={this.countTotalFeedback}
-            positivePercentage={this.countPositiveFeedbackPercentage}
-          />
+          {Boolean(this.countTotalFeedback()) ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback}
+              positivePercentage={this.countPositiveFeedbackPercentage}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
         </Section>
       </AppWrapper>
     );

@@ -1,10 +1,10 @@
 import { H2 } from 'components/Helpers/Components.styled';
 
-export const Section = props => {
+export const Section = ({ title, children }) => {
   return (
-    <Section>
-      <H2>{props.title}</H2>
-      {props.children}
-    </Section>
+    <section>
+      <H2>{title}</H2>
+      {children}
+    </section>
   );
 };
