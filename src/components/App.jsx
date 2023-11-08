@@ -1,8 +1,8 @@
+import { Component } from 'react';
 import { FeedbackOptions } from './Feedback/FeedbackOptions';
 import { Section } from './Feedback/Section';
 import { Statistics } from './Feedback/Statistics';
 import { AppWrapper } from './Helpers/Components.styled';
-import { Component } from 'react';
 import { Notification } from './Helpers/Notification';
 
 export class App extends Component {
